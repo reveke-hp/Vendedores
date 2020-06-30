@@ -1,0 +1,35 @@
+import venderores.*
+
+test "testX" {
+
+	const hurlingham = new Ciudad()
+	const buenosAires = new Provincia()
+	const moron = new Ciudad()
+	const merlo = new Ciudad()
+	
+	hurlingham.estaEn(buenosAires)
+	buenosAires.contieneA(hurlingham)
+	buenosAires.contieneA(moron)
+	
+	const juan = new VendedorFijo()
+	juan.viveEn(hurlingham)
+	assert.that(juan.puedeTrabajarEn(hurlingham))
+	juan.certificaciones(44)
+	assert.that(juan.esVersatil())
+	assert.that(juan.esFirme())
+
+	const martin = new VendedorViajante()
+	martin.agregarHabilitacion(buenosAires)
+	assert.that(not martin.puedeTrabajarEn(merlo))
+	martin.certificacionesSobreProductos(1)
+	martin.certificaciones(30)
+	assert.that(martin.esVersatil())
+	assert.that(martin.esFirme())
+	
+	const petShop = new ComercioCorresponsal()
+	petShop.agregarSucursal(hurlingham)
+	assert.that(petShop.puedeTrabajarEn(hurlingham))
+	assert.that(not petShop.esVersatil())
+	assert.that(not petShop.esFirme())
+	
+}
